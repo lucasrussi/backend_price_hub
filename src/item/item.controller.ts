@@ -1,6 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
-import { ItemFindAll } from './item.interface';
-import { Observable, of } from 'rxjs';
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { CreateItemDto } from './dto/create_item.dto';
+import { ItemService } from './item.service';
+import { Item } from './schemas/item.schema';
+
 
 
 
@@ -9,25 +11,27 @@ import { Observable, of } from 'rxjs';
 @Controller('item')
 export class ItemController {
 
+  constructor (
+    private readonly itemService:ItemService
+  ){}
+
+
+
+@Post()
+async createItem(@Body() createItem: CreateItemDto): Promise<boolean>{
+  try {
+    await this.itemService.create(createItem);
+    return true;
+  } catch (error) {
+    console.error(error)
+    return false
+  }
+}
 
 
 @Get()
-findAll():Observable<ItemFindAll[]> {
-  return of([
-      {
-        id:1,
-        marketplace:'teste',
-        products:[
-        {
-          id:1,
-          desc_item:'teste item',
-          value:134,
-          date_updated:'now'
-        }
-        ]
-      }
-    ]
-  )
+async findAll():Promise<Item[]> {
+  return await this.itemService.findAll();
 }
 
 

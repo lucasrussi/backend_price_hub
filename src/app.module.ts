@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ItensModule } from './itens/itens.module';
 import { ItemModule } from './item/item.module';
-import { ServiceModule } from './service/service.module';
+
+let pass = '';
 
 @Module({
-  imports: [ItensModule, ItemModule, ServiceModule],
+  imports: [ItemModule, MongooseModule.forRoot(`mongodb+srv://price_hub_lucas_russi:${pass}@cluster0.dnvlghq.mongodb.net/?retryWrites=true&w=majority`)],
   controllers: [AppController],
   providers: [AppService],
 })
