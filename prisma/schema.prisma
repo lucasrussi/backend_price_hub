@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+//INI - Local group model
+model State {
+  id Int @id @default(autoincrement())
+  desc_state String @db.VarChar(255)
+  desc_state_short String @db.VarChar(5)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cities City[]
+}
+
+model City {
+  id Int @id @default(autoincrement())
+  desc_city String @db.VarChar(2000)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  stateId Int
+
+  state State @relation(fields: [stateId], references: [id])
+}
+//END - Local group model
+
+
+model Market {
+  id Int @id @default(autoincrement())
+  desc_market String @db.VarChar(2000)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MarketEstab {
+  id Int @id @default(autoincrement())
+  desc_market_estab String @db.VarChar(2000)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id Int @id @default(autoincrement())
+  desc_category String @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Item {
+  id Int @id @default(autoincrement())
+  desc_category String @db.VarChar(255)
+  price Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
