@@ -33,11 +33,16 @@ model City {
 //END - Local group model
 
 
+
+
+//INI - Market group model
 model Market {
   id Int @id @default(autoincrement())
   desc_market String @db.VarChar(2000)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  marketEstab MarketEstab[]
 }
 
 model MarketEstab {
@@ -45,19 +50,61 @@ model MarketEstab {
   desc_market_estab String @db.VarChar(2000)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
 
+  estabId Int
+  market Market @relation(fields: [estabId], references: [id])
+}
+//END - Market group model
+
+
+//INI - Item group model
 model Category {
   id Int @id @default(autoincrement())
   desc_category String @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  itemType ItemType[]
 }
+
+model ItemType {
+  id Int @id @default(autoincrement())
+  desc_type String @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  item Item[]
+  itemHist ItemHist[]
+
+  categoryId Int 
+  category Category @relation(fields: [categoryId], references: [id])
+
+}
+
 
 model Item {
   id Int @id @default(autoincrement())
-  desc_category String @db.VarChar(255)
   price Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  itemTypeId Int
+
+
+  itemType ItemType @relation(fields: [itemTypeId], references: [id])
 }
+
+
+model ItemHist {
+  id Int @id @default(autoincrement()) 
+  price Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  itemTypeId Int
+
+
+  itemType ItemType @relation(fields: [itemTypeId], references: [id])
+
+}
+//END - Item group model
