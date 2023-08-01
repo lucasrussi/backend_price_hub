@@ -54,8 +54,8 @@ model MarketEstab {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  estabId Int
-  market Market @relation(fields: [estabId], references: [id])
+  marketId Int
+  market Market @relation(fields: [marketId], references: [id])
 
   cityId Int
   city City @relation(fields: [cityId], references: [id])
