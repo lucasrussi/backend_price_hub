@@ -27,8 +27,10 @@ model City {
   updatedAt DateTime @updatedAt
 
   stateId Int
-
   state State @relation(fields: [stateId], references: [id])
+
+  marketEstab MarketEstab[]
+
 }
 //END - Local group model
 
@@ -48,11 +50,16 @@ model Market {
 model MarketEstab {
   id Int @id @default(autoincrement())
   desc_market_estab String @db.VarChar(2000)
+  street String @db.VarChar(2000)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   estabId Int
   market Market @relation(fields: [estabId], references: [id])
+
+  cityId Int
+  city City @relation(fields: [cityId], references: [id])
+
 }
 //END - Market group model
 
