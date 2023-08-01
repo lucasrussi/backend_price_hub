@@ -5,11 +5,12 @@ import { PrismaModule } from './prisma/prisma.module';
 import { MarketModule } from './market/market.module';
 import { MarketEstabModule } from './market-estab/market-estab.module';
 import { CategoryModule } from './category/category.module';
+import { ItemTypeModule } from './item-type/item-type.module';
 
 
 
 @Module({
-  imports: [PrismaModule, MarketModule, MarketEstabModule, CategoryModule],
+  imports: [PrismaModule, MarketModule, MarketEstabModule, CategoryModule, ItemTypeModule],
   controllers: [AppController],
   providers: [AppService],
 })
