@@ -2,33 +2,36 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { MarketService } from './market.service';
 import { CreateMarketDto } from './dto/create-market.dto';
 import { UpdateMarketDto } from './dto/update-market.dto';
+import { FindMarket } from './interface/find-market.interface';
+
+
 
 @Controller('market')
 export class MarketController {
   constructor(private readonly marketService: MarketService) {}
 
   @Post()
-  create(@Body() createMarketDto: CreateMarketDto) {
-    return this.marketService.create(createMarketDto);
+  async create(@Body() createMarketDto: CreateMarketDto): Promise<boolean> {
+    return await this.marketService.create(createMarketDto);
   }
 
-  @Get()
-  findAll() {
-    return this.marketService.findAll();
+  @Get(':cityId')
+  async findAll(@Param('cityId') cityId:number): Promise<FindMarket[] | boolean > {
+    return this.marketService.findAll(+cityId);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.marketService.findOne(+id);
+  async findOne(@Param('id') id: number): Promise<FindMarket | boolean>{
+    return await this.marketService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMarketDto: UpdateMarketDto) {
+  async update(@Param('id') id: number, @Body() updateMarketDto: UpdateMarketDto): Promise <FindMarket | boolean> {
     return this.marketService.update(+id, updateMarketDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number): Promise<boolean> {
     return this.marketService.remove(+id);
   }
 }
