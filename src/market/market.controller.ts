@@ -17,7 +17,7 @@ export class MarketController {
 
   @Get(':cityId')
   async findAll(@Param('cityId') cityId:number): Promise<FindMarket[] | boolean > {
-    return this.marketService.findAll(+cityId);
+    return await this.marketService.findAll(+cityId);
   }
 
   @Get(':id')
@@ -27,11 +27,11 @@ export class MarketController {
 
   @Patch(':id')
   async update(@Param('id') id: number, @Body() updateMarketDto: UpdateMarketDto): Promise <FindMarket | boolean> {
-    return this.marketService.update(+id, updateMarketDto);
+    return await this.marketService.update(+id, updateMarketDto);
   }
 
   @Delete(':id')
   async remove(@Param('id') id: number): Promise<boolean> {
-    return this.marketService.remove(+id);
+    return await this.marketService.remove(+id);
   }
 }
