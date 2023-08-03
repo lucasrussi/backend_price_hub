@@ -8,11 +8,12 @@ import { ItemTypeModule } from './item-type/item-type.module';
 import { ItemModule } from './item/item.module';
 import { ItemHistModule } from './item-hist/item-hist.module';
 import { StateModule } from './state/state.module';
+import { CityModule } from './city/city.module';
 
 
 
 @Module({
-  imports: [MarketModule, MarketEstabModule, CategoryModule, ItemTypeModule, ItemModule, ItemHistModule, StateModule],
+  imports: [MarketModule, MarketEstabModule, CategoryModule, ItemTypeModule, ItemModule, ItemHistModule, StateModule, CityModule],
   controllers: [AppController],
   providers: [AppService],
 })
