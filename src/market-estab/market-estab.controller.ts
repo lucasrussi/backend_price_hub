@@ -10,36 +10,37 @@ import {
 import { MarketEstabService } from './market-estab.service';
 import { CreateMarketEstabDto } from './dto/create-market-estab.dto';
 import { UpdateMarketEstabDto } from './dto/update-market-estab.dto';
+import { FindMarketEstab } from './interface/find-market-estab.interface';
 
 @Controller('market-estab')
 export class MarketEstabController {
   constructor(private readonly marketEstabService: MarketEstabService) {}
 
   @Post()
-  create(@Body() createMarketEstabDto: CreateMarketEstabDto) {
-    return this.marketEstabService.create(createMarketEstabDto);
+  async create(@Body() createMarketEstabDto: CreateMarketEstabDto): Promise<boolean> {
+    return await this.marketEstabService.create(createMarketEstabDto);
   }
 
-  @Get()
-  findAll() {
-    return this.marketEstabService.findAll();
+  @Get(':marketId/:cityId')
+  async findAll(@Param('marketId') marketId:number, @Param('cityId') cityId:number) {
+    return await this.marketEstabService.findAll(+marketId,+cityId);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.marketEstabService.findOne(+id);
+  async findOne(@Param('id') id: string): Promise<FindMarketEstab | boolean> {
+    return await this.marketEstabService.findOne(+id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateMarketEstabDto: UpdateMarketEstabDto,
-  ) {
-    return this.marketEstabService.update(+id, updateMarketEstabDto);
+  ): Promise<FindMarketEstab | boolean> {
+    return await this.marketEstabService.update(+id, updateMarketEstabDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.marketEstabService.remove(+id);
+  async remove(@Param('id') id: string): Promise<boolean> {
+    return await this.marketEstabService.remove(+id);
   }
 }

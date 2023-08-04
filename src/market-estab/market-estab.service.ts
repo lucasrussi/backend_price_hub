@@ -1,26 +1,89 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMarketEstabDto } from './dto/create-market-estab.dto';
 import { UpdateMarketEstabDto } from './dto/update-market-estab.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { FindMarketEstab } from './interface/find-market-estab.interface';
 
 @Injectable()
 export class MarketEstabService {
-  create(createMarketEstabDto: CreateMarketEstabDto) {
-    return 'This action adds a new marketEstab';
+
+  constructor(private readonly prisma:PrismaService){}
+
+  async create(createMarketEstabDto: CreateMarketEstabDto):Promise<boolean> {
+    try {
+      await this.prisma.marketEstab.create(
+        {
+          data:createMarketEstabDto
+        }
+      )
+      return true;
+    } catch (error) {
+      console.error(`[create - MarketEstabService] - ${error}`);
+      return false;
+    }
   }
 
-  findAll() {
-    return `This action returns all marketEstab`;
+  async findAll(marketId: number, cityId:number): Promise<FindMarketEstab[] | boolean> {
+    try {
+      const marketEstab = await this.prisma.marketEstab.findMany({
+        where:{
+          cityId:cityId,
+          marketId:marketId
+        },
+        select:{
+          id:true,
+          desc_market_estab:true,
+          street:true
+        }
+      });
+      return marketEstab
+    } catch (error) {
+      console.log(`[findAll - MarketEstabService] - ${error}`);
+      return false;
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} marketEstab`;
+  async findOne(id: number): Promise<FindMarketEstab | boolean> {
+    try {
+      const marketEstab = await this.prisma.marketEstab.findUnique({
+        where:{
+          id:id
+        },
+        select:{
+          id:true,
+          desc_market_estab:true,
+          street:true
+        }
+      });
+      return marketEstab
+    } catch (error) {
+      console.log(`[findOne - MarketEstabService] - ${error}`);
+      return false;
+    }
   }
 
-  update(id: number, updateMarketEstabDto: UpdateMarketEstabDto) {
-    return `This action updates a #${id} marketEstab`;
+  async update(id: number, updateMarketEstabDto: UpdateMarketEstabDto): Promise<FindMarketEstab | boolean> {
+    try {
+      const marketEstab = await this.prisma.marketEstab.update({
+        data:updateMarketEstabDto,
+        where:{
+          id:id
+        }
+      });
+      return marketEstab;
+    } catch (error) {
+      console.log(`[update - MarketEstabService] - ${error}`);
+      return false;
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} marketEstab`;
+  async remove(id: number): Promise<boolean> {
+    try {
+      await this.prisma.marketEstab.delete({ where: { id: id } });
+      return true;
+    } catch (error) {
+      console.log(`[delete - MarketEstabService] - ${error}`);
+      return false;
+    }
   }
 }

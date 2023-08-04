@@ -3,5 +3,5 @@ export class MarketEstab {
   desc_market_estab: string;
   street: string;
   marketId: number;
-  city: number;
+  cityId: number;
 }
