@@ -2,33 +2,34 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CityService } from './city.service';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
+import { FindCity } from './interface/find-city.interface';
 
 @Controller('city')
 export class CityController {
   constructor(private readonly cityService: CityService) {}
 
   @Post()
-  create(@Body() createCityDto: CreateCityDto) {
+  async create(@Body() createCityDto: CreateCityDto): Promise<boolean> {
     return this.cityService.create(createCityDto);
   }
 
-  @Get()
-  findAll() {
-    return this.cityService.findAll();
+  @Get(':stateId')
+  async findAll(@Param('stateId') stateId:number): Promise<FindCity[] | boolean> {
+    return await this.cityService.findAll(+stateId);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.cityService.findOne(+id);
+  async findOne(@Param('id') id: string): Promise<FindCity | boolean> {
+    return await this.cityService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
-    return this.cityService.update(+id, updateCityDto);
+  async update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto): Promise<FindCity | boolean> {
+    return await this.cityService.update(+id, updateCityDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cityService.remove(+id);
+  async remove(@Param('id') id: string): Promise<boolean> {
+    return await this.cityService.remove(+id);
   }
 }
