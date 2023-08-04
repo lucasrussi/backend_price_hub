@@ -4,6 +4,6 @@ import { MarketEstabController } from './market-estab.controller';
 
 @Module({
   controllers: [MarketEstabController],
-  providers: [MarketEstabService]
+  providers: [MarketEstabService],
 })
 export class MarketEstabModule {}

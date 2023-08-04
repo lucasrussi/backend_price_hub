@@ -6,78 +6,71 @@ import { FindCity } from './interface/find-city.interface';
 
 @Injectable()
 export class CityService {
-
-  constructor(private readonly prisma:PrismaService){};
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(createCityDto: CreateCityDto): Promise<boolean> {
-   try {
-    await this.prisma.city.create(
-      {
-        data:createCityDto
-      }
-    );
-    return true;
-   } catch (error) {
-    console.error(`[create - CityService] - ${error}`);
-    return false;
-   }
+    try {
+      await this.prisma.city.create({
+        data: createCityDto,
+      });
+      return true;
+    } catch (error) {
+      console.error(`[create - CityService] - ${error}`);
+      return false;
+    }
   }
 
-  async findAll(stateId:number): Promise<FindCity[] | boolean> {
-   try {
-    const citys = await this.prisma.city.findMany(
-      {
-        where:{
-          stateId:stateId
+  async findAll(stateId: number): Promise<FindCity[] | boolean> {
+    try {
+      const citys = await this.prisma.city.findMany({
+        where: {
+          stateId: stateId,
         },
-        select:{
-          id:true,
-          desc_city:true
-        }
-      }
-    );
-    return citys;
-   } catch (error) {
-    console.log(`[findAll - CityService] - ${error}`);
-    return false;
-   }
+        select: {
+          id: true,
+          desc_city: true,
+        },
+      });
+      return citys;
+    } catch (error) {
+      console.log(`[findAll - CityService] - ${error}`);
+      return false;
+    }
   }
 
   async findOne(id: number): Promise<FindCity | boolean> {
     try {
-      const city = await this.prisma.city.findUnique(
-        {
-          where:{
-            id:id
-          },
-          select:{
-            id:true,
-            desc_city:true
-          }
-        }
-      );
-      return city
+      const city = await this.prisma.city.findUnique({
+        where: {
+          id: id,
+        },
+        select: {
+          id: true,
+          desc_city: true,
+        },
+      });
+      return city;
     } catch (error) {
-      console.log(`[findOne - CityService] - ${error}`);;
+      console.log(`[findOne - CityService] - ${error}`);
       return false;
     }
-    
   }
 
-  async update(id: number, updateCityDto: UpdateCityDto): Promise<FindCity | boolean> {
+  async update(
+    id: number,
+    updateCityDto: UpdateCityDto,
+  ): Promise<FindCity | boolean> {
     try {
-      const city = await this.prisma.city.update(
-        {
-          data:updateCityDto,
-          where:{
-            id:id
-          },
-          select:{
-            id:true,
-            desc_city:true
-          }
-        }
-      );
+      const city = await this.prisma.city.update({
+        data: updateCityDto,
+        where: {
+          id: id,
+        },
+        select: {
+          id: true,
+          desc_city: true,
+        },
+      });
       return city;
     } catch (error) {
       console.log(`[update - CityService] - ${error}`);
@@ -87,13 +80,11 @@ export class CityService {
 
   async remove(id: number) {
     try {
-      await this.prisma.city.delete(
-        {
-          where:{
-            id:id
-          }
-        }
-      );
+      await this.prisma.city.delete({
+        where: {
+          id: id,
+        },
+      });
       return true;
     } catch (error) {
       console.log(`[delete - CityService] - ${error}`);

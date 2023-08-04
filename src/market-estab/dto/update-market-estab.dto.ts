@@ -1,10 +1,8 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateMarketEstabDto } from './create-market-estab.dto';
-import { IsString, IsNumber,MaxLength,MinLength } from 'class-validator'
-
+import { IsString, IsNumber, MaxLength, MinLength } from 'class-validator';
 
 export class UpdateMarketEstabDto extends PartialType(CreateMarketEstabDto) {
-  
   @IsNumber()
   id?: number;
 

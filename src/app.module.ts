@@ -10,10 +10,17 @@ import { ItemHistModule } from './item-hist/item-hist.module';
 import { StateModule } from './state/state.module';
 import { CityModule } from './city/city.module';
 
-
-
 @Module({
-  imports: [MarketModule, MarketEstabModule, CategoryModule, ItemTypeModule, ItemModule, ItemHistModule, StateModule, CityModule],
+  imports: [
+    MarketModule,
+    MarketEstabModule,
+    CategoryModule,
+    ItemTypeModule,
+    ItemModule,
+    ItemHistModule,
+    StateModule,
+    CityModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

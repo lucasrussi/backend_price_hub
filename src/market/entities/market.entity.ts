@@ -1,5 +1,5 @@
 export class Market {
-  id?:number;
+  id?: number;
   desc_market: string;
-  cityId:number;
+  cityId: number;
 }

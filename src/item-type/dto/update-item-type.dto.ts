@@ -1,9 +1,8 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateItemTypeDto } from './create-item-type.dto';
-import { IsString, MaxLength, MinLength, IsNumber } from "class-validator";
+import { IsString, MaxLength, MinLength, IsNumber } from 'class-validator';
 
 export class UpdateItemTypeDto extends PartialType(CreateItemTypeDto) {
-
   @IsNumber()
   id?: number;
 

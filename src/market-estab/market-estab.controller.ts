@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { MarketEstabService } from './market-estab.service';
 import { CreateMarketEstabDto } from './dto/create-market-estab.dto';
 import { UpdateMarketEstabDto } from './dto/update-market-estab.dto';
@@ -23,7 +31,10 @@ export class MarketEstabController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMarketEstabDto: UpdateMarketEstabDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateMarketEstabDto: UpdateMarketEstabDto,
+  ) {
     return this.marketEstabService.update(+id, updateMarketEstabDto);
   }
 

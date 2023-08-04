@@ -6,18 +6,13 @@ import { FindState } from './interface/find-state.interface';
 
 @Injectable()
 export class StateService {
-
-  constructor(private readonly prisma:PrismaService){};
-
-
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(createStateDto: CreateStateDto): Promise<boolean> {
     try {
-      await this.prisma.state.create(
-        {
-          data:createStateDto
-        }
-      );
+      await this.prisma.state.create({
+        data: createStateDto,
+      });
       return true;
     } catch (error) {
       console.error(`[create - StateService] - ${error}`);
@@ -25,7 +20,7 @@ export class StateService {
     }
   }
 
-  async findAll(): Promise<FindState[] | boolean>{
+  async findAll(): Promise<FindState[] | boolean> {
     try {
       const states = this.prisma.state.findMany();
       return states;
@@ -37,13 +32,11 @@ export class StateService {
 
   async findOne(id: number): Promise<FindState | boolean> {
     try {
-      const state = await this.prisma.state.findUnique(
-        {
-          where:{
-            id:id
-          }
-        }
-      );
+      const state = await this.prisma.state.findUnique({
+        where: {
+          id: id,
+        },
+      });
       return state;
     } catch (error) {
       console.log(`[findOne - StateService] - ${error}`);
@@ -53,14 +46,12 @@ export class StateService {
 
   async update(id: number, updateStateDto: UpdateStateDto) {
     try {
-      const state = await this.prisma.state.update(
-        {
-          data:updateStateDto,
-          where:{
-            id:id
-          }
-        }
-      );
+      const state = await this.prisma.state.update({
+        data: updateStateDto,
+        where: {
+          id: id,
+        },
+      });
       return state;
     } catch (error) {
       console.log(`[update - StateService] - ${error}`);
@@ -70,13 +61,11 @@ export class StateService {
 
   async remove(id: number): Promise<boolean> {
     try {
-      await this.prisma.state.delete(
-        {
-          where:{
-            id:id
-          }
-        }
-      );
+      await this.prisma.state.delete({
+        where: {
+          id: id,
+        },
+      });
       return true;
     } catch (error) {
       console.log(`[delete - StateService] - ${error}`);

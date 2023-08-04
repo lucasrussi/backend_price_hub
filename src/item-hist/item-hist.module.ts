@@ -4,6 +4,6 @@ import { ItemHistController } from './item-hist.controller';
 
 @Module({
   controllers: [ItemHistController],
-  providers: [ItemHistService]
+  providers: [ItemHistService],
 })
 export class ItemHistModule {}

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { StateService } from './state.service';
 import { CreateStateDto } from './dto/create-state.dto';
 import { UpdateStateDto } from './dto/update-state.dto';
@@ -9,12 +17,12 @@ export class StateController {
   constructor(private readonly stateService: StateService) {}
 
   @Post()
-  async create(@Body() createStateDto: CreateStateDto):Promise<boolean>  {
+  async create(@Body() createStateDto: CreateStateDto): Promise<boolean> {
     return await this.stateService.create(createStateDto);
   }
 
   @Get()
-  async findAll(): Promise<FindState[] | boolean > {
+  async findAll(): Promise<FindState[] | boolean> {
     return await this.stateService.findAll();
   }
 
@@ -24,7 +32,10 @@ export class StateController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateStateDto: UpdateStateDto): Promise <FindState | boolean> {
+  async update(
+    @Param('id') id: string,
+    @Body() updateStateDto: UpdateStateDto,
+  ): Promise<FindState | boolean> {
     return await this.stateService.update(+id, updateStateDto);
   }
 

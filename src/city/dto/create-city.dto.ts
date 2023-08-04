@@ -1,7 +1,7 @@
-import { IsNumber, IsString, MaxLength, MinLength } from "class-validator";
-import { City } from "../entities/city.entity";
+import { IsNumber, IsString, MaxLength, MinLength } from 'class-validator';
+import { City } from '../entities/city.entity';
 
-export class CreateCityDto extends City{
+export class CreateCityDto extends City {
   @IsNumber()
   id?: number;
 

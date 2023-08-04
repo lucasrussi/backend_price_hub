@@ -1,7 +1,7 @@
-import { ItemHist } from "../entities/item-hist.entity";
-import { IsNumber } from "class-validator";
+import { ItemHist } from '../entities/item-hist.entity';
+import { IsNumber } from 'class-validator';
 
-export class CreateItemHistDto extends ItemHist{
+export class CreateItemHistDto extends ItemHist {
   @IsNumber()
   price: number;
 
