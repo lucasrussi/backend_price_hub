@@ -29,20 +29,20 @@ export class CityController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<FindCity | boolean> {
+  async findOne(@Param('id') id: number): Promise<FindCity | boolean> {
     return await this.cityService.findOne(+id);
   }
 
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateCityDto: UpdateCityDto,
   ): Promise<FindCity | boolean> {
     return await this.cityService.update(+id, updateCityDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<boolean> {
+  async remove(@Param('id') id: number): Promise<boolean> {
     return await this.cityService.remove(+id);
   }
 }

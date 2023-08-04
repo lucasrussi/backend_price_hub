@@ -7,4 +7,7 @@ export class CreateItemDto extends Item {
 
   @IsNumber()
   itemTypeId: number;
+
+  @IsNumber()
+  marketEstabId: number;
 }

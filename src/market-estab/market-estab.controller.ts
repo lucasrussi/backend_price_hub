@@ -27,20 +27,20 @@ export class MarketEstabController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<FindMarketEstab | boolean> {
+  async findOne(@Param('id') id: number): Promise<FindMarketEstab | boolean> {
     return await this.marketEstabService.findOne(+id);
   }
 
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateMarketEstabDto: UpdateMarketEstabDto,
   ): Promise<FindMarketEstab | boolean> {
     return await this.marketEstabService.update(+id, updateMarketEstabDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<boolean> {
+  async remove(@Param('id') id: number): Promise<boolean> {
     return await this.marketEstabService.remove(+id);
   }
 }

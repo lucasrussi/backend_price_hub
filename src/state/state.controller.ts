@@ -27,20 +27,20 @@ export class StateController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<FindState | boolean> {
+  async findOne(@Param('id') id: number): Promise<FindState | boolean> {
     return await this.stateService.findOne(+id);
   }
 
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateStateDto: UpdateStateDto,
   ): Promise<FindState | boolean> {
     return await this.stateService.update(+id, updateStateDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<boolean> {
+  async remove(@Param('id') id: number): Promise<boolean> {
     return await this.stateService.remove(+id);
   }
 }

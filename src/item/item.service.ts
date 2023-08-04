@@ -1,26 +1,80 @@
 import { Injectable } from '@nestjs/common';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { FindItem } from './interface/find-item.interface';
 
 @Injectable()
 export class ItemService {
-  create(createItemDto: CreateItemDto) {
-    return 'This action adds a new item';
+
+  constructor(private readonly prisma:PrismaService){}
+
+  async create(createItemDto: CreateItemDto): Promise<boolean> {
+    try {
+      await this.prisma.item.create({data:createItemDto});
+    } catch (error) {
+      console.error(`[create - MarketEstabService] - ${error}`);
+      return false;
+    }
   }
 
-  findAll() {
-    return `This action returns all item`;
+  async findAll(itemTypeId: number): Promise<FindItem[] | boolean> {
+    try {
+      const items = await this.prisma.item.findMany({
+        select:{
+          id:true,
+          price:true,
+          itemTypeId:true
+        },
+        where:{
+          itemTypeId:itemTypeId
+        }
+      });
+      return items;
+    } catch (error) {
+      console.log(`[findAll - MarketEstabService] - ${error}`);
+      return false;
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} item`;
+  async findOne(id: number): Promise<FindItem | boolean> {
+    try {
+      const item = await this.prisma.item.findUnique({
+        where:{id:id}
+      });
+      return item;
+    } catch (error) {
+      console.log(`[findOne - MarketEstabService] - ${error}`);
+      return false;
+    }
   }
 
-  update(id: number, updateItemDto: UpdateItemDto) {
-    return `This action updates a #${id} item`;
+  async update(id: number, updateItemDto: UpdateItemDto): Promise<FindItem | boolean> {
+    try {
+      const item = await this.prisma.item.update({
+        select:{
+          id:true,
+          price:true,
+          itemTypeId:true
+        },
+        where:{id:id},
+        data:updateItemDto
+      });
+
+      return item;
+    } catch (error) {
+      console.log(`[update - MarketEstabService] - ${error}`);
+      return false;
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} item`;
+  async remove(id: number): Promise<boolean> {
+    try {
+      await this.prisma.item.delete({where:{id:id}});
+      return true
+    } catch (error) {
+      console.log(`[delete - MarketEstabService] - ${error}`);
+      return false;
+    }
   }
 }

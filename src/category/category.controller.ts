@@ -27,20 +27,20 @@ export class CategoryController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<FindCategory | boolean> {
+  async findOne(@Param('id') id: number): Promise<FindCategory | boolean> {
     return this.categoryService.findOne(+id);
   }
 
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ): Promise<FindCategory | boolean> {
     return this.categoryService.update(+id, updateCategoryDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<boolean>{
+  async remove(@Param('id') id: number): Promise<boolean>{
     return this.categoryService.remove(+id);
   }
 }

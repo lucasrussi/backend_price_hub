@@ -64,6 +64,9 @@ model MarketEstab {
   cityId Int
   city City @relation(fields: [cityId], references: [id])
 
+  item Item[]
+  itemHist ItemHist[]
+
 }
 //END - Market group model
 
@@ -100,9 +103,10 @@ model Item {
   updatedAt DateTime @updatedAt
 
   itemTypeId Int
-
-
   itemType ItemType @relation(fields: [itemTypeId], references: [id])
+
+  marketEstabId Int
+  marketEstab MarketEstab @relation(fields: [marketEstabId], references: [id])
 }
 
 
@@ -113,9 +117,10 @@ model ItemHist {
   updatedAt DateTime @updatedAt
 
   itemTypeId Int
-
-
   itemType ItemType @relation(fields: [itemTypeId], references: [id])
+
+  marketEstabId Int
+  marketEstab MarketEstab @relation(fields: [marketEstabId], references: [id])
 
 }
 //END - Item group model
