@@ -10,36 +10,37 @@ import {
 import { ItemTypeService } from './item-type.service';
 import { CreateItemTypeDto } from './dto/create-item-type.dto';
 import { UpdateItemTypeDto } from './dto/update-item-type.dto';
+import { FindItemType } from './interface/find-item-type.interface';
 
 @Controller('item-type')
 export class ItemTypeController {
   constructor(private readonly itemTypeService: ItemTypeService) {}
 
   @Post()
-  create(@Body() createItemTypeDto: CreateItemTypeDto) {
-    return this.itemTypeService.create(createItemTypeDto);
+  async create(@Body() createItemTypeDto: CreateItemTypeDto): Promise<boolean> {
+    return await this.itemTypeService.create(createItemTypeDto);
   }
 
-  @Get()
-  findAll() {
-    return this.itemTypeService.findAll();
+  @Get(':categoryId')
+  async findAll(@Param('categoryId') categoryId: number):Promise< FindItemType[] | boolean> {
+    return await this.itemTypeService.findAll(+categoryId);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itemTypeService.findOne(+id);
+  async findOne(@Param('id') id: string):Promise< FindItemType | boolean>  {
+    return await this.itemTypeService.findOne(+id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateItemTypeDto: UpdateItemTypeDto,
-  ) {
-    return this.itemTypeService.update(+id, updateItemTypeDto);
+  ):Promise< FindItemType | boolean> {
+    return await this.itemTypeService.update(+id, updateItemTypeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itemTypeService.remove(+id);
+  async remove(@Param('id') id: string): Promise<boolean> {
+    return await this.itemTypeService.remove(+id);
   }
 }
