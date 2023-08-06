@@ -142,7 +142,7 @@ describe('StateService', () =>{
   });
 
   describe('DeleteOne', () =>{
-    it('Should delete state and return false', async () =>{
+    it('Should delete state and return true', async () =>{
       const response = await service.remove(1);
 
       expect(response).toEqual(true);
