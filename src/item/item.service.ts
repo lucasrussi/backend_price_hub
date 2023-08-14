@@ -12,6 +12,7 @@ export class ItemService {
   async create(createItemDto: CreateItemDto): Promise<boolean> {
     try {
       await this.prisma.item.create({data:createItemDto});
+      return true
     } catch (error) {
       console.error(`[create - MarketEstabService] - ${error}`);
       return false;
