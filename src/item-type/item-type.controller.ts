@@ -27,20 +27,20 @@ export class ItemTypeController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string):Promise< FindItemType | boolean>  {
+  async findOne(@Param('id') id: number):Promise< FindItemType | boolean>  {
     return await this.itemTypeService.findOne(+id);
   }
 
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateItemTypeDto: UpdateItemTypeDto,
   ):Promise< FindItemType | boolean> {
     return await this.itemTypeService.update(+id, updateItemTypeDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<boolean> {
+  async remove(@Param('id') id: number): Promise<boolean> {
     return await this.itemTypeService.remove(+id);
   }
 }
