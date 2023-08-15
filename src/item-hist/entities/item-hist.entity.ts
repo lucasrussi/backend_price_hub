@@ -1,5 +1,6 @@
 export class ItemHist {
-  id: number;
+  id?: number;
   price: number;
   itemTypeId: number;
+  marketEstabId:number
 }

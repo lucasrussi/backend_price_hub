@@ -20,26 +20,26 @@ export class ItemHistController {
     return this.itemHistService.create(createItemHistDto);
   }
 
-  @Get()
-  findAll() {
-    return this.itemHistService.findAll();
+  @Get(':itemTypeId')
+  findAll(@Param('itemTypeId') itemTypeId: number) {
+    return this.itemHistService.findAll(+itemTypeId);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.itemHistService.findOne(+id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateItemHistDto: UpdateItemHistDto,
   ) {
     return this.itemHistService.update(+id, updateItemHistDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.itemHistService.remove(+id);
   }
 }
