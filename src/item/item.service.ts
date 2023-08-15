@@ -14,7 +14,7 @@ export class ItemService {
       await this.prisma.item.create({data:createItemDto});
       return true
     } catch (error) {
-      console.error(`[create - MarketEstabService] - ${error}`);
+      console.error(`[create - ItemService] - ${error}`);
       return false;
     }
   }
@@ -33,7 +33,7 @@ export class ItemService {
       });
       return items;
     } catch (error) {
-      console.log(`[findAll - MarketEstabService] - ${error}`);
+      console.log(`[findAll - ItemService] - ${error}`);
       return false;
     }
   }
@@ -45,7 +45,7 @@ export class ItemService {
       });
       return item;
     } catch (error) {
-      console.log(`[findOne - MarketEstabService] - ${error}`);
+      console.log(`[findOne - ItemService] - ${error}`);
       return false;
     }
   }
@@ -64,7 +64,7 @@ export class ItemService {
 
       return item;
     } catch (error) {
-      console.log(`[update - MarketEstabService] - ${error}`);
+      console.log(`[update - ItemService] - ${error}`);
       return false;
     }
   }
@@ -74,7 +74,7 @@ export class ItemService {
       await this.prisma.item.delete({where:{id:id}});
       return true
     } catch (error) {
-      console.log(`[delete - MarketEstabService] - ${error}`);
+      console.log(`[delete - ItemService] - ${error}`);
       return false;
     }
   }

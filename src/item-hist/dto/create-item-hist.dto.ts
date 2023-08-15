@@ -7,4 +7,7 @@ export class CreateItemHistDto extends ItemHist {
 
   @IsNumber()
   itemTypeId: number;
+
+  @IsNumber()
+  marketEstabId:number;
 }
