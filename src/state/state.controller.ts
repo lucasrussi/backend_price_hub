@@ -18,27 +18,29 @@ export class StateController {
   constructor(private readonly stateService: StateService) {}
 
   @Post()
-  async create(@Body() createStateDto: CreateStateDto): Promise<Boolean> {
+  async create(@Body() createStateDto: CreateStateDto): Promise<boolean> {
     return await this.stateService.create(createStateDto);
   }
 
   @Get()
-  async findAll(): Promise<FindState[] | Boolean> {
+  async findAll(): Promise<FindState[] | boolean> {
     return await this.stateService.findAll();
   }
   @Get('findAllWithCity')
-  async findAllWithCity(): Promise<FindStateWithCity[] | Boolean> {
+  async findAllWithCity(): Promise<FindStateWithCity[] | boolean> {
     return await this.stateService.findAllWithCity();
   }
   @Get('findOne/:id')
-  async findOne(@Param('id') id: number): Promise<FindState | Boolean> {
+  async findOne(@Param('id') id: number): Promise<FindState | boolean> {
     return await this.stateService.findOne(+id);
   }
   @Get('findAllWithCity/:id')
-  async findOneWithCity(@Param('id') id: number): Promise<FindStateWithCity | Boolean> {
+  async findOneWithCity(
+    @Param('id') id: number,
+  ): Promise<FindStateWithCity | boolean> {
     return await this.stateService.findOneWithCity(+id);
   }
- 
+
   @Patch(':id')
   async update(
     @Param('id') id: number,
@@ -48,7 +50,7 @@ export class StateController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number): Promise<Boolean> {
+  async remove(@Param('id') id: number): Promise<boolean> {
     return await this.stateService.remove(+id);
   }
 }

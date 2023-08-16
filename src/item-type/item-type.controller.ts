@@ -22,12 +22,14 @@ export class ItemTypeController {
   }
 
   @Get(':categoryId')
-  async findAll(@Param('categoryId') categoryId: number):Promise< FindItemType[] | boolean> {
+  async findAll(
+    @Param('categoryId') categoryId: number,
+  ): Promise<FindItemType[] | boolean> {
     return await this.itemTypeService.findAll(+categoryId);
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number):Promise< FindItemType | boolean>  {
+  async findOne(@Param('id') id: number): Promise<FindItemType | boolean> {
     return await this.itemTypeService.findOne(+id);
   }
 
@@ -35,7 +37,7 @@ export class ItemTypeController {
   async update(
     @Param('id') id: number,
     @Body() updateItemTypeDto: UpdateItemTypeDto,
-  ):Promise< FindItemType | boolean> {
+  ): Promise<FindItemType | boolean> {
     return await this.itemTypeService.update(+id, updateItemTypeDto);
   }
 

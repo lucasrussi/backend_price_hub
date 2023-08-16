@@ -17,13 +17,18 @@ export class MarketEstabController {
   constructor(private readonly marketEstabService: MarketEstabService) {}
 
   @Post()
-  async create(@Body() createMarketEstabDto: CreateMarketEstabDto): Promise<boolean> {
+  async create(
+    @Body() createMarketEstabDto: CreateMarketEstabDto,
+  ): Promise<boolean> {
     return await this.marketEstabService.create(createMarketEstabDto);
   }
 
   @Get(':marketId/:cityId')
-  async findAll(@Param('marketId') marketId:number, @Param('cityId') cityId:number) {
-    return await this.marketEstabService.findAll(+marketId,+cityId);
+  async findAll(
+    @Param('marketId') marketId: number,
+    @Param('cityId') cityId: number,
+  ) {
+    return await this.marketEstabService.findAll(+marketId, +cityId);
   }
 
   @Get(':id')

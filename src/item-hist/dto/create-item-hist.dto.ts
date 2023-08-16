@@ -9,5 +9,5 @@ export class CreateItemHistDto extends ItemHist {
   itemTypeId: number;
 
   @IsNumber()
-  marketEstabId:number;
+  marketEstabId: number;
 }

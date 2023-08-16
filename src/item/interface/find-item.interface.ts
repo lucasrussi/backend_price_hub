@@ -1,5 +1,5 @@
 export interface FindItem {
-  id:number;
-  price:number;
+  id: number;
+  price: number;
   itemTypeId: number;
 }

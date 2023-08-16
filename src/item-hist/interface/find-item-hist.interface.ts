@@ -1,6 +1,6 @@
 export interface FindItemHist {
-  id:number;
-  price:number;
+  id: number;
+  price: number;
   itemTypeId: number;
-  marketEstabId:number;
+  marketEstabId: number;
 }

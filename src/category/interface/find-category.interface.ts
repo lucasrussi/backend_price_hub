@@ -1,4 +1,4 @@
 export interface FindCategory {
-  id:number;
-  desc_category:string;
+  id: number;
+  desc_category: string;
 }

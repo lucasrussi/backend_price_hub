@@ -5,6 +5,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Module({
   controllers: [DailyrefreshController],
-  providers: [DailyRefreshService, PrismaService]
+  providers: [DailyRefreshService, PrismaService],
 })
 export class DailyrefreshModule {}

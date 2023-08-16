@@ -4,6 +4,6 @@ import { ItemHistController } from './item-hist.controller';
 import { PrismaService } from 'src/prisma/prisma.service';
 @Module({
   controllers: [ItemHistController],
-  providers: [ItemHistService,PrismaService],
+  providers: [ItemHistService, PrismaService],
 })
 export class ItemHistModule {}

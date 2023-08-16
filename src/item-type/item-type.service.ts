@@ -6,12 +6,11 @@ import { FindItemType } from './interface/find-item-type.interface';
 
 @Injectable()
 export class ItemTypeService {
-
-  constructor(private readonly prisma: PrismaService){}
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(createItemTypeDto: CreateItemTypeDto): Promise<boolean> {
     try {
-      await this.prisma.itemType.create({data:createItemTypeDto});
+      await this.prisma.itemType.create({ data: createItemTypeDto });
       return true;
     } catch (error) {
       console.log(`[create - ItemType] - ${error}`);
@@ -19,43 +18,46 @@ export class ItemTypeService {
     }
   }
 
-  async findAll(categoryId:number):Promise< FindItemType[] | boolean> {
+  async findAll(categoryId: number): Promise<FindItemType[] | boolean> {
     try {
       const itemTypes = await this.prisma.itemType.findMany({
-        where:{
-          categoryId:categoryId
-        }
+        where: {
+          categoryId: categoryId,
+        },
       });
-      return itemTypes
+      return itemTypes;
     } catch (error) {
       console.log(`[findAll - ItemType] - ${error}`);
       return false;
     }
   }
 
-  async findOne(id: number):Promise< FindItemType | boolean> {
+  async findOne(id: number): Promise<FindItemType | boolean> {
     try {
       const itemType = await this.prisma.itemType.findUnique({
-        where:{
-          id:id
-        }
+        where: {
+          id: id,
+        },
       });
-      return itemType
+      return itemType;
     } catch (error) {
       console.log(`[findOne - ItemType] - ${error}`);
       return false;
     }
   }
 
-  async update(id: number, updateItemTypeDto: UpdateItemTypeDto):Promise< FindItemType | boolean> {
+  async update(
+    id: number,
+    updateItemTypeDto: UpdateItemTypeDto,
+  ): Promise<FindItemType | boolean> {
     try {
       const itemType = await this.prisma.itemType.update({
-        data:updateItemTypeDto,
-        where:{
-          id:id
-        }
+        data: updateItemTypeDto,
+        where: {
+          id: id,
+        },
       });
-      return itemType
+      return itemType;
     } catch (error) {
       console.log(`[update - ItemType] - ${error}`);
       return false;
@@ -65,8 +67,8 @@ export class ItemTypeService {
   async remove(id: number): Promise<boolean> {
     try {
       await this.prisma.itemType.delete({
-        where:{id:id}
-      })
+        where: { id: id },
+      });
       return true;
     } catch (error) {
       console.log(`[delete - ItemType] - ${error}`);

@@ -30,23 +30,22 @@ export class StateService {
       return false;
     }
   }
-  async findAllWithCity():Promise<FindStateWithCity[] | Boolean>{
+  async findAllWithCity(): Promise<FindStateWithCity[] | boolean> {
     try {
-      const response = await this.prisma.state.findMany(
-        {
-          select:{
-            id:true,
-            desc_state:true,
-            desc_state_short:true,
-            cities:{
-              select:{
-                id:true,
-                desc_city:true
-              }
-            }
-          }
-        });
-        return response
+      const response = await this.prisma.state.findMany({
+        select: {
+          id: true,
+          desc_state: true,
+          desc_state_short: true,
+          cities: {
+            select: {
+              id: true,
+              desc_city: true,
+            },
+          },
+        },
+      });
+      return response;
     } catch (error) {
       console.log(`[delete - findAllWithCity] - ${error}`);
       return false;
@@ -66,26 +65,25 @@ export class StateService {
     }
   }
 
-  async findOneWithCity(id: number):Promise<FindStateWithCity | Boolean>{
+  async findOneWithCity(id: number): Promise<FindStateWithCity | boolean> {
     try {
-      const response = await this.prisma.state.findUnique(
-        {
-          select:{
-            id:true,
-            desc_state:true,
-            desc_state_short:true,
-            cities:{
-              select:{
-                id:true,
-                desc_city:true
-              }
-            }
+      const response = await this.prisma.state.findUnique({
+        select: {
+          id: true,
+          desc_state: true,
+          desc_state_short: true,
+          cities: {
+            select: {
+              id: true,
+              desc_city: true,
+            },
           },
-          where:{
-            id:id
-          }
-        });
-        return response
+        },
+        where: {
+          id: id,
+        },
+      });
+      return response;
     } catch (error) {
       console.log(`[delete - findAllWithCity] - ${error}`);
       return false;
@@ -119,6 +117,4 @@ export class StateService {
       return false;
     }
   }
-
-  
 }
