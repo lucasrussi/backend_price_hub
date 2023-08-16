@@ -9,6 +9,7 @@ import { ItemModule } from './item/item.module';
 import { ItemHistModule } from './item-hist/item-hist.module';
 import { StateModule } from './state/state.module';
 import { CityModule } from './city/city.module';
+import { DailyrefreshModule } from './dailyrefresh/dailyrefresh.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CityModule } from './city/city.module';
     ItemHistModule,
     StateModule,
     CityModule,
+    DailyrefreshModule,
   ],
   controllers: [AppController],
   providers: [AppService],
